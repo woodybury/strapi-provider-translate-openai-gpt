@@ -1,6 +1,6 @@
 # OpenAI translation provider for Strapi Translate Plugin
 
-Configure the OpenAi GPT provider through the pluginOptions:
+Configure the OpenAi provider through the pluginOptions:
 
 ```js
 module.exports = {
@@ -8,18 +8,17 @@ module.exports = {
   translate: {
     enabled: true,
     config: {
-      // Add the name of your provider here (required)
+      // Add the name of your provider
       provider: 'openai-gpt',
       providerOptions: {
-        // Your provider might define some custom options like an apiKey
-        // your API key - required and wil cause errors if not provided
+        // your API key
         apiKey: 'sk-YOUR_API_KEY',
         // model - default: 'gpt-4o'
         model: 'gpt-4o',
         // max tokens used per one translate operation - default: 4096
         maxTokens: 4096,
         // additional system prompt for the translation - default: none.
-        generalPromt: 'Do not translate paths, slugs, etc.',
+        generalPrompt: 'Do not translate paths, slugs, etc.',
       },
       // Which field types are translated (default string, text, richtext, components and dynamiczones)
       // Either string or object with type and format

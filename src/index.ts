@@ -11,7 +11,7 @@ interface IProviderOptions {
   basePath?: string;
   localeMap?: object;
   maxTokens?: number;
-  generalPromt?: string;
+  generalPrompt?: string;
 }
 
 interface ITranslate {
@@ -44,26 +44,26 @@ class ProviderOptions {
   readonly model: string;
   readonly localeMap: object;
   readonly maxTokens: number;
-  readonly generalPromt?: string;
+  readonly generalPrompt?: string;
 
-  constructor({ apiKey, model, localeMap, maxTokens, generalPromt }: IProviderOptions) {
+  constructor({ apiKey, model, localeMap, maxTokens, generalPrompt }: IProviderOptions) {
     if (!apiKey) throw new Error(`apiKey is not defined`);
     if (!model) throw new Error(`model is not defined`);
     this.localeMap = localeMap || {};
     this.maxTokens = maxTokens || 4096;
-    this.generalPromt = generalPromt;
+    this.generalPrompt = generalPrompt;
 
     this.apiKey = apiKey;
     this.model = model;
   }
 }
 
-export const init = ({ apiKey, model, localeMap, maxTokens, generalPromt }: IProviderOptions = {}): IProvider => {
+export const init = ({ apiKey, model, localeMap, maxTokens, generalPrompt }: IProviderOptions = {}): IProvider => {
   const options = new ProviderOptions({
     apiKey: apiKey || process.env.OPENAI_API_KEY,
     model: model || process.env.OPENAI_MODEL || 'gpt-4',
     maxTokens: Number(maxTokens) || Number(process.env.OPENAI_MAX_TOKENS) || 4096,
-    generalPromt: generalPromt || process.env.OPENAI_GENERAL_PROMPT || '',
+    generalPrompt: generalPrompt || process.env.OPENAI_GENERAL_PROMPT || '',
     localeMap,
   });
   const client = createTranslateClient(options);
@@ -105,9 +105,9 @@ export const init = ({ apiKey, model, localeMap, maxTokens, generalPromt }: IPro
         editorjs: `Translate the key content editorjs JSON object from ${sLocale} to ${tLocale}, only translating text fields: for "paragraph" it's "text", for "header" it's "text", for "list" it's "items", for "checklist" it's "items", for "quote" it's "text" and "caption", for "table" it's "content", for "image" it's "caption", and for "link_tool" it's "meta.title" and "meta.description". It is important to preserve the structure and leave all other fields untouched.`,
       };
 
-      if (options.generalPromt) {
-        promptMap.plain += `\n\n${options.generalPromt}`;
-        promptMap.editorjs += `\n\n${options.generalPromt}`;
+      if (options.generalPrompt) {
+        promptMap.plain += `\n\n${options.generalPrompt}`;
+        promptMap.editorjs += `\n\n${options.generalPrompt}`;
       }
 
       const formattedTextArray: {
