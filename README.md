@@ -1,4 +1,4 @@
-# OpenAI GPT translation provider for Strapi Translate Plugin
+# OpenAI translation provider for Strapi Translate Plugin
 
 Configure the OpenAi GPT provider through the pluginOptions:
 
