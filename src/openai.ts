@@ -64,7 +64,7 @@ class ChatGptTranslator {
   }> {
     return {
       count: 1,
-      limit: 10,
+      limit: 4096 * 4,
     };
   }
 }
